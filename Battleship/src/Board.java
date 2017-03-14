@@ -33,10 +33,10 @@ public class Board {
 
     public void putShip(ShipType shipType, Coordinate coordinate, boolean vertical) {
         if (isPlacedOutOfBoard(shipType, coordinate, vertical)) {
-            throw new RuntimeException("Ship can not be placed in here due to map limitations");
+            throw new RuntimeException("Navio não pode ser posto aqui: limitações de mapa");
         }
         if (isConflictingWithOtherShip(shipType, coordinate)) {
-            throw new RuntimeException("Ship can not be placed in here due to conflict with other ship");
+            throw new RuntimeException("Navio não pode ser posto aqui: espaço já ocupado.");
         }
         Ship ship = new Ship(shipType, coordinate, vertical);
         this.ships.add(ship);
@@ -61,7 +61,7 @@ public class Board {
                 .findAny();
 
         if (optional.isPresent()) {
-            System.err.println("WARN ship found at " + coordinate);
+            System.err.println("Navio encontrado em " + coordinate);
             Ship ship = optional.get();
             ship.shot(coordinate);
             if (ship.isAlive()) {

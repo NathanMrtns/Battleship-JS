@@ -1,43 +1,43 @@
 import java.util.Random;
 
 public class BattleshipsWithAI {
+	
+
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Board board = new Board();
-        //board.putShip(ShipType.CRUISER, new Coordinate(Letter.A, 1), true);
-        board.putShip(ShipType.DEESTROYER, new Coordinate(Letter.C, 5), false);
-        
-        Random randLetter = new Random();
-        Random randNumber = new Random();
-        //Randomly shooting in the board
-        while(board.getNShips() > 0){
-        	Letter coordY = Letter.valueOf(randLetter.nextInt(9));
-        	int coordX = randNumber.nextInt(9)+1;
-        	Coordinate c = new Coordinate(coordY,coordX);
-        	if(!board.getShots().contains(c)){
-            	board.shoot(c);
-        	}
+    	
+    	int games = 1;
+    	int numberOfPlays = 0;
+    	
+        for(int i=0; i< games; i++){
+	
+	        Board board = new Board();
+	        //board.putShip(ShipType.CRUISER, new Coordinate(Letter.A, 1), true);
+	        board.putShip(ShipType.DEESTROYER, new Coordinate(Letter.C, 5), true);
+	        //board.shoot(new Coordinate(Letter.A, 10));
+	
+	        Random randLetter = new Random();
+	        Random randNumber = new Random();
+	        
+	            //Randomly shooting in the board
+	            while(board.getNShips() > 0){
+	            	Letter coordY = Letter.valueOf(randLetter.nextInt(10));
+	            	int coordX = randNumber.nextInt(10)+1;
+	            	Coordinate c = new Coordinate(coordY,coordX);
+	            	if(!board.getShots().contains(c)){
+	                	board.shoot(c);
+	            	}
+	            }
+	            print(board);
+	            numberOfPlays += board.getShots().size();
+	            System.out.println("Finalizado em: " + board.getShots().size() + " jogadas! \n"); 
         }
         
-        //print(board);
-//        board.shoot(new Coordinate(Letter.A, 10));
-//
-//        //print(board);
-//        board.shoot(new Coordinate(Letter.C, 5));
-//
-//        //print(board);
-//        board.shoot(new Coordinate(Letter.C, 6));
-//
-//        //print(board);
-//        board.shoot(new Coordinate(Letter.C, 7));
-//
-        //print(board);
-        //board.shoot(new Coordinate(Letter.A, 1));
-        print(board);
-        System.out.println("Reeolvido em " + board.getShots().size() + " jogadas!");
+        System.out.println("Média de jogadas em " + games + " jogos: " + numberOfPlays/games);
+
     }
 
     private static void print(Board board) {
