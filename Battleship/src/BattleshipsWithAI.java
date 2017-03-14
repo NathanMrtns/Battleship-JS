@@ -42,16 +42,16 @@ public class BattleshipsWithAI {
 
     private static void print(Board board) {
         Field[][] map = board.print();
-        System.out.print(' ');
+        System.out.print("  ");
         for (int i = 1; i < 11; i++) {
-            System.out.print(i);
+            System.out.print(i+ " ");
         }
         System.out.println();
         Letter letter = Letter.A;
         for (Field[] row : map) {
-            System.out.print(letter);
+            System.out.print(letter + " ");
             for (Field field : row) {
-                System.out.print(field.getFlag());
+                System.out.print(field.getFlag() + " ");
             }
             System.out.println();
             if (letter != Letter.J) {
