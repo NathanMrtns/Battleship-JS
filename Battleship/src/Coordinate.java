@@ -1,4 +1,3 @@
-
 public class Coordinate {
 
     private final Letter letter;
