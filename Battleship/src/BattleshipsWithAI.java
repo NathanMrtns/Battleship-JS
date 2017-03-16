@@ -9,7 +9,7 @@ public class BattleshipsWithAI {
      */
     public static void main(String[] args) {
     	
-    	int games = 1;
+    	int games = 10;
     	int numberOfPlays = 0;
     	
         for(int i=0; i< games; i++){
@@ -19,11 +19,14 @@ public class BattleshipsWithAI {
 	        
 	        board.putShip(ShipType.CRUISER, new Coordinate(Letter.A, 1), true);
 	        board.putShip(ShipType.DEESTROYER, new Coordinate(Letter.C, 5), true);
+	        board.putShip(ShipType.SUBMARINE, new Coordinate(Letter.D, 10), true);
+	        board.putShip(ShipType.BATTLESHIP, new Coordinate(Letter.H, 2), false);
+	        board.putShip(ShipType.AIRCRAFT, new Coordinate(Letter.B, 8), true);
 	        
-	        board.shoot(new Coordinate(Letter.A, 10));
-	
+	        print(board);
 	        ai.solveBoard();
 	        print(board);
+	        
 	        numberOfPlays += ai.getNumberOfShots();
 	        System.out.println("Método Utilizado: " + ai.getAIType());
 	        System.out.println("Finalizado em: " + ai.getNumberOfShots() + " jogadas! \n"); 
