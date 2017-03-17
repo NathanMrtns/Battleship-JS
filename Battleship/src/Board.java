@@ -83,7 +83,9 @@ public class Board {
         for (Coordinate shot : shots) {
             int x = shot.getDigit() - 1;
             int y = shot.getLetter().getIndex();
-            map[y][x] = Field.MISS;
+            if (y < 10 && y > 0 && x < 10 && x > 0){
+            	map[y][x] = Field.MISS;
+            }
         }
         for (Ship ship : ships) {
             boolean sunk = !ship.isAlive();

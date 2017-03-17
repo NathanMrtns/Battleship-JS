@@ -16,6 +16,7 @@ public class BattleshipsWithAI {
 	
 	        Board board = new Board();
 	        Player ai = new RandomAI(board);
+	        //Player ai = new FirstHeuristicAI(board);
 	        
 	        board.putShip(ShipType.CRUISER, new Coordinate(Letter.A, 1), true);
 	        board.putShip(ShipType.DEESTROYER, new Coordinate(Letter.C, 5), true);
@@ -28,7 +29,7 @@ public class BattleshipsWithAI {
 	        print(board);
 	        
 	        numberOfPlays += ai.getNumberOfShots();
-	        System.out.println("Método Utilizado: " + ai.getAIType());
+	        System.out.println("Mï¿½todo Utilizado: " + ai.getAIType());
 	        System.out.println("Finalizado em: " + ai.getNumberOfShots() + " jogadas! \n"); 
         }
         

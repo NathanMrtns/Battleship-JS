@@ -20,9 +20,17 @@ public class Coordinate {
     public Coordinate findNextVertical() {
         return new Coordinate(letter.next(), digit);
     }
+    
+    public Coordinate findPrevVertical() {
+        return new Coordinate(letter.prev(), digit);
+    }
 
     public Coordinate findNextHorizontal() {
         return new Coordinate(letter, digit + 1);
+    }
+    
+    public Coordinate findPrevHorizontal() {
+        return new Coordinate(letter, digit - 1);
     }
 
     @Override
