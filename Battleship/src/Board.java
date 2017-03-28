@@ -14,6 +14,8 @@ public class Board {
     private final List<Coordinate> shots;
     
     private int numberOfShips;
+    
+    private ArrayList<Integer> shipSizes;
 
     public Board() {
         this.maxX = 10;
@@ -21,6 +23,8 @@ public class Board {
         this.ships = new ArrayList<>();
         this.shots = new ArrayList<>();
         this.numberOfShips = this.ships.size();
+        this.shipSizes = new ArrayList<Integer>() ;
+
     }
     
     public int getNShips(){
@@ -40,6 +44,7 @@ public class Board {
         }
         Ship ship = new Ship(shipType, coordinate, vertical);
         this.ships.add(ship);
+        this.shipSizes.add(ship.getShipType().getSize());
         this.numberOfShips++;
     }
 
@@ -103,4 +108,8 @@ public class Board {
         }
         return map;
     }
-}
+    
+    public ArrayList<Integer> getBoardShipSizes(){
+    	return this.shipSizes;
+    }
+} 

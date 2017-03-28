@@ -200,6 +200,6 @@ public class FirstHeuristicAI extends Player {
 
 	@Override
 	public String getAIType() {
-		return "Heurística 01";
+		return "Target Heuristic";
 	}
 }

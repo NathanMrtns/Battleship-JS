@@ -9,14 +9,15 @@ public class BattleshipsWithAI {
      */
     public static void main(String[] args) {
     	
-    	int games = 10;
+    	int games = 1;
     	int numberOfPlays = 0;
     	
         for(int i=0; i< games; i++){
 	
 	        Board board = new Board();
-	        Player ai = new RandomAI(board);
+	        //Player ai = new RandomAI(board);
 	        //Player ai = new FirstHeuristicAI(board);
+	        Player ai = new ProbabilityAI(board);
 	        
 	        board.putShip(ShipType.CRUISER, new Coordinate(Letter.A, 1), true);
 	        board.putShip(ShipType.DEESTROYER, new Coordinate(Letter.C, 5), true);
@@ -24,9 +25,9 @@ public class BattleshipsWithAI {
 	        board.putShip(ShipType.BATTLESHIP, new Coordinate(Letter.H, 2), false);
 	        board.putShip(ShipType.AIRCRAFT, new Coordinate(Letter.B, 8), true);
 	        
-	        print(board);
+	        //print(board);
 	        ai.solveBoard();
-	        print(board);
+	        //print(board);
 	        
 	        numberOfPlays += ai.getNumberOfShots();
 	        System.out.println("M�todo Utilizado: " + ai.getAIType());
