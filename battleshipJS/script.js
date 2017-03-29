@@ -296,7 +296,7 @@ Inspiration: http://www.datagenetics.com/blog/december32011/
                     clearHuntVars();
                     volleyButton.disabled = false;
                 }
-            }, 500);
+            }, 10);
     }
 
     function fireAtBestPosition() {
