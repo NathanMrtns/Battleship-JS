@@ -26,11 +26,11 @@ Inspiration: http://www.datagenetics.com/blog/december32011/
         board,
         resultMsg,
         volleyButton,
-        checkMean = false,
+        checkMean = true,
         BLIND = 3,
         PROB = 4,
         HUNT = 5,
-        iaType = PROB;
+        iaType = HUNT;
 
     // run immediately
     initialize();
@@ -527,7 +527,11 @@ Inspiration: http://www.datagenetics.com/blog/december32011/
         return (Math.round(Math.random()) == 1);
     }
 
+    var minMoves = 100;
+    var maxMoves = 0;
+
     function runcheckMean() {
+
         var heuristic = "";
         var elapsed, sum = 0,
             runs = (hitsSkewProbabilities ? 50 : 100);
@@ -551,12 +555,20 @@ Inspiration: http://www.datagenetics.com/blog/december32011/
               }
             }
             sum += moves;
+            if(moves < minMoves){
+              minMoves = moves;
+            }
+            if(moves > maxMoves){
+              maxMoves = moves;
+            }
         }
 
         elapsed = (new Date()).getTime() - elapsed;
         console.log('Test duration: ' + elapsed + 'ms ' + heuristic );
 
-        resultMsg.innerHTML = 'Average moves: <b>' + (sum / runs) + "</b> " + heuristic;
+        resultMsg.innerHTML = 'Average moves: <b>' + (sum / runs) + "</b> " + heuristic + "<br> Min Moves: " + minMoves + "<br> Max Moves: " + maxMoves;
+        minMoves = 100;
+        maxMoves = 0;
     }
 
 }(document));
