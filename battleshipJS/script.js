@@ -26,11 +26,28 @@ Inspiration: http://www.datagenetics.com/blog/december32011/
         board,
         resultMsg,
         volleyButton,
-        checkMean = false,
+        checkMean = true,
         BLIND = 3,
         PROB = 4,
         HUNT = 5,
-        iaType = PROB;
+        iaType = HUNT;
+
+        //Ships properties (positions)
+        var carrier = [],
+        carrierHits = 5,
+        isCarrierAlive = true,
+        battleship = [],
+        battleShipHits = 4,
+        isBattleshipAlive = true,
+        cruiser = [],
+        cruiserHits = 3,
+        isCruiserAlive = true,
+        submarine = [],
+        submarineHits = 3,
+        isSubmarineAlive = true,
+        destroyer = [],
+        destroyerHits = 2,
+        isDestroyerAlive = true;
 
     // run immediately
     initialize();
@@ -65,51 +82,42 @@ Inspiration: http://www.datagenetics.com/blog/december32011/
         redrawBoard(false);
     }
 
-    var carrier;
-    var carrierHits = 5;
-    var isCarrierAlive = true;
-    var battleship;
-    var battleShipHits = 4;
-    var isBattleshipAlive = true;
-    var cruiser;
-    var cruiserHits = 3;
-    var isCruiserAlive = true;
-    var submarine;
-    var submarineHits = 3;
-    var isSubmarineAlive = true;
-    var destroyer;
-    var destroyerHits = 2;
-    var isDestroyerAlive = true;
-
     function distributeShips() {
         var pos, shipPlaced, vertical;
-        if(iaType == PROB || iaType == BLIND){
+        if(iaType == PROB || iaType == BLIND || iaType == HUNT){
+          var lastShip = 0;
           for (var i = 0, l = ships.length; i < l; i++) {
               shipPlaced = false;
               vertical = randomBoolean();
               while (!shipPlaced) {
                   var shipPositions = [];
                   pos = getRandomPosition();
-                  shipPlaced = placeShip(pos, ships[i], vertical);
+                  if(lastShip == 3 && i == 3){
+                    shipPlaced = placeShip(pos, ships[i], vertical, true);
+                  }else{
+                    shipPlaced = placeShip(pos, ships[i], vertical, false);
+                  }
               }
+              lastShip = i;
           }
-        }else{
-          placeShip([0,1], 5, true); // [0,1], [0,2], [0,3] , [0,4], [0,5]
-          placeShip([9,5], 4, true); // [9,5], [9,6], [9,7], [9,8]
-          placeShip([2,8], 3, false); // [2,8], [3,8], [4,8]
-          placeShip([5,2], 3, false); //[5,2], [6,2], [7,2]
-          placeShip([3,5], 2, true); //[3,5], [3,6]
-
-          carrier = ["[0,1]", "[0,2]", "[0,3]" , "[0,4]", "[0,5]"];
-          battleship = ["[9,5]", "[9,6]", "[9,7]", "[9,8]"];
-          cruiser = ["[2,8]", "[3,8]", "[4,8]"];
-          submarine = ["[5,2]", "[6,2]", "[7,2]"];
-          destroyer = ["[3,5]", "[3,6]"];
-        }
+        } // manually place ships
+        // else{
+        //   placeShip([0,1], 5, true); // [0,1], [0,2], [0,3] , [0,4], [0,5]
+        //   placeShip([9,5], 4, true); // [9,5], [9,6], [9,7], [9,8]
+        //   placeShip([2,8], 3, false); // [2,8], [3,8], [4,8]
+        //   placeShip([5,2], 3, false); //[5,2], [6,2], [7,2]
+        //   placeShip([3,5], 2, true); //[3,5], [3,6]
+        //
+        //   carrier = ["[0,1]", "[0,2]", "[0,3]" , "[0,4]", "[0,5]"];
+        //   battleship = ["[9,5]", "[9,6]", "[9,7]", "[9,8]"];
+        //   cruiser = ["[2,8]", "[3,8]", "[4,8]"];
+        //   submarine = ["[5,2]", "[6,2]", "[7,2]"];
+        //   destroyer = ["[3,5]", "[3,6]"];
+        // }
     }
 
 
-    function placeShip(pos, shipSize, vertical) {
+    function placeShip(pos, shipSize, vertical, isSubmarine) {
         // "pos" is ship origin
         var x = pos[0],
             y = pos[1],
@@ -120,14 +128,29 @@ Inspiration: http://www.datagenetics.com/blog/december32011/
             for (var i = z; i <= end; i++) {
                 if (vertical) {
                     positions[x][i] = SHIP;
-
+                    savePositions(shipSize, x, i, isSubmarine);
                 } else {
                     positions[i][y] = SHIP;
+                    savePositions(shipSize, i, y, isSubmarine);
                 }
             }
             return true;
         }
         return false;
+    }
+
+    function savePositions(shipSize, x, y, isSubmarine){
+      if(shipSize == 5){
+        carrier.push("["+x+","+y+"]");
+      }else if( shipSize == 4){
+        battleship.push("["+x+","+y+"]");
+      }else if(shipSize == 3 && !isSubmarine){
+        cruiser.push("["+x+","+y+"]");
+      }else if(shipSize == 3&& isSubmarine ){
+        submarine.push("["+x+","+y+"]");
+      }else if(shipSize == 2){
+        destroyer.push("["+x+","+y+"]");
+      }
     }
 
     function redrawBoard(displayProbability) {
