@@ -26,11 +26,11 @@ Inspiration: http://www.datagenetics.com/blog/december32011/
         board,
         resultMsg,
         volleyButton,
-        checkMean = true,
+        checkMean = false,
         BLIND = 3,
         PROB = 4,
         HUNT = 5,
-        iaType = HUNT;
+        iaType = PROB;
 
     // run immediately
     initialize();
@@ -117,31 +117,12 @@ Inspiration: http://www.datagenetics.com/blog/december32011/
             end = z + shipSize - 1;
 
         if (shipCanOccupyPosition(SHIP, pos, shipSize, vertical)) {
-            var shipAttribute;
-            if (shipPositions["ship-" + shipSize] != undefined) {
-                shipAttribute = "ship-" + shipSize + "-2";
-            } else {
-                shipAttribute = "ship-" + shipSize;
-            }
-
-            var currentPos = [];
             for (var i = z; i <= end; i++) {
                 if (vertical) {
                     positions[x][i] = SHIP;
-                    currentPos.push("[" + x + "," + i + "]");
-                    if (shipPositions[shipAttribute] == undefined) {
-                        shipPositions[shipAttribute] = "";
-                    } else {
-                        shipPositions[shipAttribute] = (currentPos.toString());
-                    }
+
                 } else {
                     positions[i][y] = SHIP;
-                    currentPos.push("[" + x + "," + i + "]");
-                    if (shipPositions[shipAttribute] == undefined) {
-                        shipPositions[shipAttribute] = "";
-                    } else {
-                        shipPositions[shipAttribute] = (currentPos.toString());
-                    }
                 }
             }
             return true;
