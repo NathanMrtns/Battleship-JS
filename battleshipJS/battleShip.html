@@ -3,9 +3,20 @@
 <body>
 
 <div id="battleship" >
-    <input id="volley" type="button" value="Start" /> <span id="result"></span>
+    <input id="volley" type="button" value="Start" />
+    <br><br>
+    <span>Choose Heuristic: </span>
+        <select id="heuristic" onchange="changeHeuristic()">
+          <option value="3" selected="true">Blind Search</option>
+          <option value="4">Probabilistic</option>
+          <option value="5">Hunt and Target</option>
+    </select>
 
     <table id="board"></table>
+
+    <br>
+
+    <span id="result"></span>
 </div>
 
 </body>

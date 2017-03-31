@@ -4,6 +4,8 @@ Inspiration: http://www.datagenetics.com/blog/december32011/
 
 */
 
+var iaType = 3;
+
 (function(document) {
     'use strict';
 
@@ -26,11 +28,10 @@ Inspiration: http://www.datagenetics.com/blog/december32011/
         board,
         resultMsg,
         volleyButton,
-        checkMean = true,
+        checkMean = false,
         BLIND = 3,
         PROB = 4,
-        HUNT = 5,
-        iaType = HUNT;
+        HUNT = 5;
 
         //Ships properties (positions)
         var carrier = [],
@@ -576,3 +577,8 @@ Inspiration: http://www.datagenetics.com/blog/december32011/
     }
 
 }(document));
+
+function changeHeuristic(){
+  console.log("changed " + document.getElementById("heuristic").value);
+  iaType = document.getElementById("heuristic").value;
+}
